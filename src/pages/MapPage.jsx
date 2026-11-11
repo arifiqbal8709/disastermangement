@@ -1228,6 +1228,16 @@ export default function MapPage({
                     </div>
                   </div>
 
+                  {/* Launch Full What-If Simulator Sandbox */}
+                  <button
+                    type="button"
+                    onClick={() => setIsSimulatorModalOpen(true)}
+                    className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-sm hover:scale-[1.02]"
+                  >
+                    <Activity className="h-3.5 w-3.5" />
+                    <span>Launch What-If Sandbox</span>
+                  </button>
+
                   <div className="bg-brand-orange-50 border border-brand-orange-200/50 p-2.5 rounded-xl text-[10px] text-brand-orange-800 leading-normal font-semibold flex gap-1.5">
                     <AlertTriangle className="h-4 w-4 text-brand-orange-600 flex-shrink-0 mt-0.5" />
                     <div>
@@ -1529,6 +1539,25 @@ export default function MapPage({
           </div>
         </div>
       )}
+
+      {/* ⚡ FEATURE 4: WHAT-IF DISASTER SCENARIO SIMULATOR MODAL */}
+      <ScenarioSimulatorModal
+        isOpen={isSimulatorModalOpen}
+        onClose={() => setIsSimulatorModalOpen(false)}
+        districtId={activeDistrict?.id || 'dhemaji'}
+        districtName={activeDistrict?.name || 'District'}
+        onApplyToMap={(scenarioResult) => {
+          if (setSimulationMode) {
+            setSimulationMode(
+              scenarioResult.parameters.rainfallSurgePct >= 60 ? 'severe' :
+              scenarioResult.parameters.rainfallSurgePct >= 30 ? 'moderate' : 'low'
+            );
+          }
+          if (scenarioResult.disasterType) {
+            setSimDisaster(scenarioResult.disasterType);
+          }
+        }}
+      />
 
     </div>
   );
