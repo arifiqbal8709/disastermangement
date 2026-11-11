@@ -193,6 +193,27 @@ export default function Dashboard({ selectedDistrictId, selectedDisasterType = "
             <p className="text-slate-500 text-sm max-w-xl font-medium">
               National Disaster Management Framework interface mapping dynamic hazard assessments and mitigation indicators.
             </p>
+
+            {/* Phase 1 Action Controls */}
+            <div className="flex flex-wrap gap-2.5 pt-1">
+              <button
+                type="button"
+                onClick={() => setIsSimulatorOpen(true)}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-[11px] px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-sm transition-all hover:scale-[1.02] uppercase tracking-wider"
+              >
+                <Waves className="h-4 w-4" />
+                <span>What-If Simulator</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsMemoryOpen(true)}
+                className="bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-[11px] px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-sm transition-all hover:scale-[1.02] uppercase tracking-wider"
+              >
+                <BookOpen className="h-4 w-4" />
+                <span>Disaster Memory</span>
+              </button>
+            </div>
           </div>
 
           {/* Preparedness Score Widget */}
