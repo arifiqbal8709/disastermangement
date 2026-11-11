@@ -207,6 +207,7 @@ export default function Landing({
   const [selectedDistrict, setSelectedDistrict] = useState("all");
   const [mapCenter, setMapCenter] = useState([26.2006, 92.9376]);
   const [mapZoom, setMapZoom] = useState(7);
+  const [baseMapLayer, setBaseMapLayer] = useState('satellite'); // 'satellite' | 'streets'
 
   // Ingested layer references
   const [ingestedLayers, setIngestedLayers] = useState({
