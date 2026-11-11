@@ -590,21 +590,21 @@ export default function MapPage({
           {layers.floodRisk && ingestedLayers.asdma_flood_atlas && (
             <GeoJSON 
               data={ingestedLayers.asdma_flood_atlas.data} 
-              style={{ color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.25, weight: 1.5 }}
+              style={{ color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.15, weight: 1.5 }}
             />
           )}
 
           {layers.landslideRisk && ingestedLayers.gsi_bhusanket && (
             <GeoJSON 
               data={ingestedLayers.gsi_bhusanket.data} 
-              style={{ color: '#ea580c', fillColor: '#ea580c', fillOpacity: 0.25, weight: 1.5 }}
+              style={{ color: '#ea580c', fillColor: '#ea580c', fillOpacity: 0.15, weight: 1.5 }}
             />
           )}
 
           {layers.earthquakeRisk && ingestedLayers.bmtpc_earthquake && (
             <GeoJSON 
               data={ingestedLayers.bmtpc_earthquake.data} 
-              style={{ color: '#dc2626', fillColor: '#dc2626', fillOpacity: 0.25, weight: 1.5 }}
+              style={{ color: '#dc2626', fillColor: '#dc2626', fillOpacity: 0.15, weight: 1.5 }}
             />
           )}
 
