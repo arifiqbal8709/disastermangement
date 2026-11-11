@@ -166,6 +166,14 @@ export default function AdminSources({ onLogout }) {
         };
 
         saveIngestedDataset(selectedKey, parsedData, meta);
+        
+        // Also persist shelters directly to Supabase Backend
+        if (selectedKey === 'official_shelters' && Array.isArray(parsedData)) {
+          api.resources.batchImportShelters(parsedData).catch(err => {
+            console.warn('Backend sync notice:', err.message);
+          });
+        }
+
         loadRegistry();
         
         setAlert({
