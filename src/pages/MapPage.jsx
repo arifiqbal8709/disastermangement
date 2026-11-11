@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Circle, Polyline, useMap, GeoJSON, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
-import { Layers, ShieldCheck, MapPin, Landmark, HeartPulse, ShieldAlert, Navigation, Home, Activity, X, Info, AlertTriangle, Zap, CheckCircle2, Droplets, Wind, Mountain, Sun, FileText, Database, AlertCircle, Compass, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Layers, ShieldCheck, MapPin, Landmark, HeartPulse, ShieldAlert, Navigation, Home, Activity, X, Info, AlertTriangle, Zap, CheckCircle2, Droplets, Wind, Mountain, Sun, FileText, Database, AlertCircle, Compass, ArrowRight, ChevronDown, ChevronUp, Globe } from 'lucide-react';
 import { districts, getDistrictData } from '../data/mockData';
 import SourceBadge from '../components/SourceBadge';
 import { getIngestedDataset } from '../dataSources/dataIngestion';
