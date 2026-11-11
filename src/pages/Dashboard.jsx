@@ -5,6 +5,10 @@ import { getDistrictData } from '../data/mockData';
 import SourceBadge from '../components/SourceBadge';
 import { getIngestedDataset } from '../dataSources/dataIngestion';
 import { api } from '../services/api';
+import ScenarioSimulatorModal from '../components/ScenarioSimulatorModal';
+import DisasterMemoryModal from '../components/DisasterMemoryModal';
+import RiskIntelligenceCard from '../components/RiskIntelligenceCard';
+import { Waves, BookOpen, Sparkles } from 'lucide-react';
 
 const getMetricIcon = (name) => {
   switch (name) {
@@ -46,6 +50,8 @@ export default function Dashboard({ selectedDistrictId, selectedDisasterType = "
   const [dynamicShelterCapacity, setDynamicShelterCapacity] = useState(null);
 
   const [latestAiAnalysis, setLatestAiAnalysis] = useState(null);
+  const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
+  const [isMemoryOpen, setIsMemoryOpen] = useState(false);
 
   useEffect(() => {
     setDynamicShelterCount(null);
