@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Calendar, Clock, Download, Landmark, Users, ClipboardList, CheckSquare, Square, CheckCircle2, Loader2, AlertCircle, RefreshCw, FileText } from 'lucide-react';
 import { getDistrictData } from '../data/mockData';
 import SourceBadge from '../components/SourceBadge';
+import { exportActionPlanPDF } from '../utils/pdfExport';
 
 export default function ActionPlan({ selectedDistrictId, selectedDisasterType = "Flood", simulationMode }) {
   // Find current selected district dynamically based on hazard
@@ -59,17 +60,33 @@ export default function ActionPlan({ selectedDistrictId, selectedDisasterType = 
   const immediatePercent = immediateTasks.length ? Math.round((completedImmediateCount / immediateTasks.length) * 100) : 0;
   const midTermPercent = midTermTasks.length ? Math.round((completedMidTermCount / midTermTasks.length) * 100) : 0;
 
-  // Simulate PDF compilation
+  // Real PDF Compilation and Export using jsPDF
   const handleDownloadReport = () => {
     setIsDownloading(true);
     setDownloadSuccess(false);
-    setTimeout(() => {
+
+    try {
+      exportActionPlanPDF({
+        districtName: activeDistrict.name,
+        state: activeDistrict.state,
+        hazardType: selectedDisasterType,
+        preparednessScore: activeDistrict.preparednessScore,
+        riskLevel: activeDistrict.preparednessStatus || 'Moderate Risk',
+        immediateTasks: immediateTasks,
+        midTermTasks: midTermTasks,
+        source: activeDistrict.sourceKey || 'ASDMA_DDMP'
+      });
+
       setIsDownloading(false);
       setDownloadSuccess(true);
       setTimeout(() => {
         setDownloadSuccess(false);
-      }, 4000);
-    }, 1500);
+      }, 5000);
+    } catch (err) {
+      console.error('Error generating PDF:', err);
+      setIsDownloading(false);
+      alert('Failed to generate PDF document: ' + err.message);
+    }
   };
 
   const hasTasks = immediateTasks.length > 0 || midTermTasks.length > 0;
