@@ -119,6 +119,9 @@ export default function App() {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 selection:bg-brand-blue-100">
+      {/* 🔴 Live Verified CAP Disaster Alert Center Banner */}
+      <LiveAlertBanner selectedDistrictId={selectedDistrictId} />
+
       {/* Top Navigation */}
       <Navbar activePage={activePage} setActivePage={setActivePage} />
 
