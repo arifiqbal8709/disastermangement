@@ -1,6 +1,6 @@
 import express from 'express';
 import { SupabaseService } from '../services/supabaseService.js';
-import { verifyToken, requireRole } from '../middleware/authMiddleware.js';
+import { requireAdminAuth } from '../middleware/authMiddleware.js';
 import { AuditService } from '../services/auditService.js';
 
 const router = express.Router();
