@@ -208,6 +208,14 @@ export default function Landing({
   const [mapCenter, setMapCenter] = useState([26.2006, 92.9376]);
   const [mapZoom, setMapZoom] = useState(7);
 
+  // Ingested layer references
+  const [ingestedLayers, setIngestedLayers] = useState({
+    asdma_flood_atlas: null,
+    gsi_bhusanket: null,
+    bmtpc_earthquake: null,
+    imd_warnings: null
+  });
+
   const [liveStats, setLiveStats] = useState({
     disastersCataloged: statisticsSummary.disastersCataloged,
     districtsMonitored: statisticsSummary.districtsMonitored,
