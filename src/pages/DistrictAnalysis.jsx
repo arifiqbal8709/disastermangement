@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Brain, FileText, UploadCloud, CheckCircle2, AlertTriangle, AlertCircle, X, ShieldCheck } from 'lucide-react';
+import { Brain, FileText, UploadCloud, CheckCircle2, AlertTriangle, AlertCircle, X, ShieldCheck, BookOpen } from 'lucide-react';
 import { districts } from '../data/mockData';
 import { api } from '../services/api';
+import DisasterMemoryModal from '../components/DisasterMemoryModal';
 
 export default function DistrictAnalysis({ 
   selectedDistrictId, 
