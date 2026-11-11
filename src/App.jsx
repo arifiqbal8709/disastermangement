@@ -9,6 +9,7 @@ import About from './pages/About';
 import MapPage from './pages/MapPage';
 import AdminSources from './pages/AdminSources';
 import { AdminLogin } from './components/AdminLogin';
+import LiveAlertBanner from './components/LiveAlertBanner';
 import { districts } from './data/mockData';
 import { api } from './services/api';
 
