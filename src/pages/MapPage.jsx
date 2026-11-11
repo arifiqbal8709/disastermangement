@@ -6,6 +6,7 @@ import { Layers, ShieldCheck, MapPin, Landmark, HeartPulse, ShieldAlert, Navigat
 import { districts, getDistrictData } from '../data/mockData';
 import SourceBadge from '../components/SourceBadge';
 import { getIngestedDataset } from '../dataSources/dataIngestion';
+import { api } from '../services/api';
 
 // Helper to construct custom HTML markers based on hazard risk and layer types
 const createCustomIcon = (color, type, label) => {
