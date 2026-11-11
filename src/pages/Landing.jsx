@@ -446,21 +446,21 @@ export default function Landing({
               {layers.floodRisk && ingestedLayers.asdma_flood_atlas && selectedState === "Assam" && (
                 <GeoJSON 
                   data={ingestedLayers.asdma_flood_atlas.data} 
-                  style={{ color: '#2563EB', fillColor: '#2563EB', fillOpacity: 0.25, weight: 1.5 }}
+                  style={{ color: '#2563EB', fillColor: '#2563EB', fillOpacity: 0.15, weight: 1.5 }}
                 />
               )}
 
               {layers.landslideRisk && ingestedLayers.gsi_bhusanket && selectedState === "Assam" && (
                 <GeoJSON 
                   data={ingestedLayers.gsi_bhusanket.data} 
-                  style={{ color: '#EA580C', fillColor: '#EA580C', fillOpacity: 0.25, weight: 1.5 }}
+                  style={{ color: '#EA580C', fillColor: '#EA580C', fillOpacity: 0.15, weight: 1.5 }}
                 />
               )}
 
               {layers.earthquakeRisk && ingestedLayers.bmtpc_earthquake && selectedState === "Assam" && (
                 <GeoJSON 
                   data={ingestedLayers.bmtpc_earthquake.data} 
-                  style={{ color: '#DC2626', fillColor: '#DC2626', fillOpacity: 0.25, weight: 1.5 }}
+                  style={{ color: '#DC2626', fillColor: '#DC2626', fillOpacity: 0.15, weight: 1.5 }}
                 />
               )}
 
