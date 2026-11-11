@@ -1,7 +1,7 @@
 import express from 'express';
 import { SupabaseService } from '../services/supabaseService.js';
 import { verifyToken, requireRole } from '../middleware/authMiddleware.js';
-import { auditLog } from '../services/auditService.js';
+import { AuditService } from '../services/auditService.js';
 
 const router = express.Router();
 
@@ -63,10 +63,15 @@ router.post('/', verifyToken, requireRole(['admin', 'super_admin']), async (req,
       created_by: req.user.id
     });
 
-    await auditLog(req.user.email, 'BROADCAST_ALERT', 'ALERTS', {
-      alertId: createdAlert.id,
-      headline,
-      severity
+    await AuditService.log({
+      userEmail: req.user.email,
+      action: 'BROADCAST_ALERT',
+      resourceType: 'ALERTS',
+      details: {
+        alertId: createdAlert.id,
+        headline,
+        severity
+      }
     });
 
     return res.status(201).json({
