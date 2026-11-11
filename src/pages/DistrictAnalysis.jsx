@@ -34,6 +34,7 @@ export default function DistrictAnalysis({
   const [selectedDistrictName, setSelectedDistrictName] = useState("");
   const [localDisasterType, setLocalDisasterType] = useState(selectedDisasterType || "Flood");
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [isMemoryOpen, setIsMemoryOpen] = useState(false);
 
   useEffect(() => {
     if (selectedDisasterType) {
