@@ -676,9 +676,10 @@ export default function MapPage({
                       radius={22000 + (isTargetSimulated && simDisaster === 'Flood' ? simulatedRiskOffsetRadius : 0)}
                       pathOptions={{
                         fillColor: '#06b6d4',
-                        fillOpacity: 0.28,
+                        fillOpacity: 0.08,
                         color: '#0284c7',
-                        weight: 1.5
+                        opacity: 0.4,
+                        weight: 1
                       }}
                     />
 
@@ -688,9 +689,10 @@ export default function MapPage({
                       radius={8000}
                       pathOptions={{
                         fillColor: '#10b981',
-                        fillOpacity: 0.55,
+                        fillOpacity: 0.12,
                         color: '#059669',
-                        weight: 2
+                        opacity: 0.5,
+                        weight: 1
                       }}
                     >
                       <Popup>
@@ -709,9 +711,10 @@ export default function MapPage({
                       radius={15000 + (isTargetSimulated && simDisaster === 'Flood' ? simulatedRiskOffsetRadius : 0)}
                       pathOptions={{
                         fillColor: '#eab308',
-                        fillOpacity: 0.45,
+                        fillOpacity: 0.10,
                         color: '#ca8a04',
-                        weight: 2
+                        opacity: 0.5,
+                        weight: 1
                       }}
                     >
                       <Popup>
@@ -730,9 +733,10 @@ export default function MapPage({
                       radius={10000 + (isTargetSimulated && simDisaster === 'Flood' ? simulatedRiskOffsetRadius : 0)}
                       pathOptions={{
                         fillColor: '#f97316',
-                        fillOpacity: 0.65,
+                        fillOpacity: 0.14,
                         color: '#ea580c',
-                        weight: 2.5
+                        opacity: 0.6,
+                        weight: 1.5
                       }}
                     />
 
@@ -741,10 +745,11 @@ export default function MapPage({
                       center={[center[0] - 0.015, center[1] - 0.018]}
                       radius={6000 + (isTargetSimulated && simDisaster === 'Flood' ? simulatedRiskOffsetRadius : 0)}
                       pathOptions={{
-                        fillColor: '#b91c1c',
-                        fillOpacity: 0.85,
+                        fillColor: '#dc2626',
+                        fillOpacity: 0.18,
                         color: '#ef4444',
-                        weight: 3
+                        opacity: 0.7,
+                        weight: 1.5
                       }}
                     >
                       <Popup>
@@ -764,7 +769,7 @@ export default function MapPage({
                   <Circle
                     center={center}
                     radius={18000 + (isTargetSimulated && simDisaster === 'Cyclone' ? simulatedRiskOffsetRadius : 0)}
-                    pathOptions={{ fillColor: '#0d9488', fillOpacity: 0.12, color: '#0d9488', weight: 1 }}
+                    pathOptions={{ fillColor: '#0d9488', fillOpacity: 0.08, color: '#0d9488', opacity: 0.4, weight: 1 }}
                   />
                 )}
 
@@ -773,7 +778,7 @@ export default function MapPage({
                   <Circle
                     center={center}
                     radius={12000 + (isTargetSimulated && simDisaster === 'Landslide' ? simulatedRiskOffsetRadius : 0)}
-                    pathOptions={{ fillColor: '#ea580c', fillOpacity: 0.12, color: '#ea580c', weight: 1 }}
+                    pathOptions={{ fillColor: '#ea580c', fillOpacity: 0.08, color: '#ea580c', opacity: 0.4, weight: 1 }}
                   />
                 )}
 
@@ -782,7 +787,7 @@ export default function MapPage({
                   <Circle
                     center={center}
                     radius={20000 + (isTargetSimulated && simDisaster === 'Earthquake' ? simulatedRiskOffsetRadius : 0)}
-                    pathOptions={{ fillColor: '#dc2626', fillOpacity: 0.12, color: '#dc2626', weight: 1 }}
+                    pathOptions={{ fillColor: '#dc2626', fillOpacity: 0.08, color: '#dc2626', opacity: 0.4, weight: 1 }}
                   />
                 )}
 
@@ -791,7 +796,7 @@ export default function MapPage({
                   <Circle
                     center={center}
                     radius={16000 + (isTargetSimulated && simDisaster === 'Heatwave' ? simulatedRiskOffsetRadius : 0)}
-                    pathOptions={{ fillColor: '#d97706', fillOpacity: 0.12, color: '#d97706', weight: 1 }}
+                    pathOptions={{ fillColor: '#d97706', fillOpacity: 0.08, color: '#d97706', opacity: 0.4, weight: 1 }}
                   />
                 )}
 
@@ -802,9 +807,10 @@ export default function MapPage({
                     radius={24000}
                     pathOptions={{
                       fillColor: dist.riskColor === 'red' ? '#dc2626' : dist.riskColor === 'orange' ? '#f97316' : '#eab308',
-                      fillOpacity: 0.22,
+                      fillOpacity: 0.10,
                       color: dist.riskColor === 'red' ? '#dc2626' : dist.riskColor === 'orange' ? '#f97316' : '#eab308',
-                      weight: 2
+                      opacity: 0.4,
+                      weight: 1.5
                     }}
                   />
                 )}
