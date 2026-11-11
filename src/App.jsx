@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Landing from './pages/Landing';
@@ -8,7 +8,9 @@ import ActionPlan from './pages/ActionPlan';
 import About from './pages/About';
 import MapPage from './pages/MapPage';
 import AdminSources from './pages/AdminSources';
+import { AdminLogin } from './components/AdminLogin';
 import { districts } from './data/mockData';
+import { api } from './services/api';
 
 export default function App() {
   const [activePage, setActivePage] = useState('landing');
@@ -16,6 +18,28 @@ export default function App() {
   const [selectedDisasterType, setSelectedDisasterType] = useState(districts[0].primaryHazard);
   const [simulationMode, setSimulationMode] = useState(null);
   const [showSheltersOnMap, setShowSheltersOnMap] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('resilience_admin_token');
+    if (token) {
+      api.auth.verify()
+        .then(res => {
+          if (res && res.success) {
+            setIsAdminAuthenticated(true);
+          } else {
+            setIsAdminAuthenticated(false);
+          }
+        })
+        .catch(() => setIsAdminAuthenticated(false));
+    }
+  }, []);
+
+  const handleAdminLogout = async () => {
+    await api.auth.logout();
+    setIsAdminAuthenticated(false);
+    setActivePage('landing');
+  };
 
   const renderActivePage = () => {
     switch (activePage) {
@@ -60,7 +84,14 @@ export default function App() {
       case 'about':
         return <About />;
       case 'admin':
-        return <AdminSources />;
+        return isAdminAuthenticated ? (
+          <AdminSources onLogout={handleAdminLogout} />
+        ) : (
+          <AdminLogin 
+            onLoginSuccess={() => setIsAdminAuthenticated(true)} 
+            onCancel={() => setActivePage('landing')} 
+          />
+        );
       case 'map':
         return (
           <MapPage 
