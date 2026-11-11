@@ -267,8 +267,21 @@ export default function MapPage({
       setHasShelterData(true);
       setLayers(prev => ({ ...prev, shelters: true, raisedPlatforms: true }));
     } else {
-      setShelterDataset([]);
-      setHasShelterData(false);
+      // Fetch live verified shelters from backend REST API
+      api.resources.getShelters()
+        .then(shelters => {
+          if (shelters && shelters.length > 0) {
+            setShelterDataset(shelters);
+            setHasShelterData(true);
+          } else {
+            setShelterDataset([]);
+            setHasShelterData(false);
+          }
+        })
+        .catch(() => {
+          setShelterDataset([]);
+          setHasShelterData(false);
+        });
       setLayers(prev => ({ ...prev, shelters: true, raisedPlatforms: true }));
     }
   };
