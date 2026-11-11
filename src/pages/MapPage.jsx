@@ -7,6 +7,7 @@ import { districts, getDistrictData } from '../data/mockData';
 import SourceBadge from '../components/SourceBadge';
 import { getIngestedDataset } from '../dataSources/dataIngestion';
 import { api } from '../services/api';
+import ScenarioSimulatorModal from '../components/ScenarioSimulatorModal';
 
 // Helper to construct custom HTML markers based on hazard risk and layer types
 const createCustomIcon = (color, type, label) => {
@@ -229,6 +230,7 @@ export default function MapPage({
   const [isMarksDirectoryOpen, setIsMarksDirectoryOpen] = useState(true);
   const [activeDirectoryTab, setActiveDirectoryTab] = useState('marks');
   const [isLayersPanelOpen, setIsLayersPanelOpen] = useState(true);
+  const [isSimulatorModalOpen, setIsSimulatorModalOpen] = useState(false);
   
   // Load dynamic datasets from local Ingestion Engine
   const [ingestedLayers, setIngestedLayers] = useState({
