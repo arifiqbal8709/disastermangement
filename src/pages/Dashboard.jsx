@@ -361,6 +361,13 @@ export default function Dashboard({ selectedDistrictId, selectedDisasterType = "
           )}
         </div>
 
+        {/* 🧠 FEATURE 1: AI MULTI-HAZARD RISK INTELLIGENCE */}
+        <RiskIntelligenceCard 
+          districtId={activeDistrict.id} 
+          hazardType={selectedDisasterType} 
+          onOpenMemory={() => setIsMemoryOpen(true)} 
+        />
+
         {/* AI Detected Preparedness Gaps & Resource Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
@@ -668,6 +675,24 @@ export default function Dashboard({ selectedDistrictId, selectedDisasterType = "
           </div>
         </div>
       )}
+
+      {/* ⚡ FEATURE 4: WHAT-IF DISASTER SCENARIO SIMULATOR MODAL */}
+      <ScenarioSimulatorModal
+        isOpen={isSimulatorOpen}
+        onClose={() => setIsSimulatorOpen(false)}
+        districtId={activeDistrict.id}
+        districtName={activeDistrict.name}
+        onApplyToMap={(scenarioResult) => {
+          if (setActivePage) setActivePage('map');
+        }}
+      />
+
+      {/* 🏛️ FEATURE 2: HISTORICAL DISASTER MEMORY EXPLORER MODAL */}
+      <DisasterMemoryModal
+        isOpen={isMemoryOpen}
+        onClose={() => setIsMemoryOpen(false)}
+        defaultDistrict={activeDistrict.name}
+      />
 
     </div>
   );
