@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { BookOpen, AlertTriangle, ShieldCheck, ArrowRight, Activity, Zap, Layers, ChevronRight, Droplets, Wind, Mountain, Sun, Globe, ShieldAlert, Landmark, Compass } from 'lucide-react';
 import { statisticsSummary, districts } from '../data/mockData';
 import { getIngestedDataset } from '../dataSources/dataIngestion';
+import { api } from '../services/api';
 
 // Complete coordinate parameters config for all 36 Indian States and UTs
 const stateMapConfig = {
