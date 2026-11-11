@@ -551,16 +551,61 @@ export default function MapPage({
       {/* Left Area: Map Canvas */}
       <div className="flex-grow h-[calc(100vh-64px)] relative z-10">
         
+        {/* Floating Satellite / Street View Mode Switcher */}
+        <div className="absolute top-4 right-4 z-[999] bg-[#071B33]/90 backdrop-blur-md p-1 rounded-xl shadow-xl border border-slate-700/80 flex items-center gap-1 text-[11px] font-bold">
+          <button
+            type="button"
+            onClick={() => setBaseMapLayer('satellite')}
+            className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all ${
+              baseMapLayer === 'satellite'
+                ? 'bg-blue-600 text-white shadow-md font-extrabold'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800'
+            }`}
+          >
+            <Globe className="h-3.5 w-3.5 text-blue-300" />
+            <span>🛰️ Satellite</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setBaseMapLayer('streets')}
+            className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all ${
+              baseMapLayer === 'streets'
+                ? 'bg-blue-600 text-white shadow-md font-extrabold'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800'
+            }`}
+          >
+            <MapPin className="h-3.5 w-3.5 text-blue-300" />
+            <span>🗺️ Streets</span>
+          </button>
+        </div>
+
         <MapContainer 
           center={[26.2441, 92.5376]} 
           zoom={7.5} 
           scrollWheelZoom={true}
           style={{ width: '100%', height: '100%' }}
         >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+          {baseMapLayer === 'satellite' ? (
+            <>
+              {/* Esri High-Resolution Orbital Satellite Imagery */}
+              <TileLayer
+                attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                maxZoom={19}
+              />
+              {/* Esri Administrative Boundaries & Place Names Reference Overlay */}
+              <TileLayer
+                attribution='&copy; Esri'
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
+                maxZoom={19}
+              />
+            </>
+          ) : (
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+          )}
 
           {/* 🌐 GIS SATELLITE RADAR COORDINATE GRID LINES OVERLAY */}
           <React.Fragment>
