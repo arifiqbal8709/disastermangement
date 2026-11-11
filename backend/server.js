@@ -18,6 +18,10 @@ import incidentRoutes from './src/routes/incidentRoutes.js';
 import resourceRoutes from './src/routes/resourceRoutes.js';
 import actionPlanRoutes from './src/routes/actionPlanRoutes.js';
 import statsRoutes from './src/routes/statsRoutes.js';
+import alertRoutes from './src/routes/alertRoutes.js';
+import memoryRoutes from './src/routes/memoryRoutes.js';
+import simulatorRoutes from './src/routes/simulatorRoutes.js';
+import intelligenceRoutes from './src/routes/intelligenceRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -81,6 +85,10 @@ app.use('/api/incidents', incidentRoutes);
 app.use('/api/resources', resourceRoutes);
 app.use('/api/action-plans', actionPlanRoutes);
 app.use('/api/stats', statsRoutes);
+app.use('/api/alerts', alertRoutes);
+app.use('/api/memory', memoryRoutes);
+app.use('/api/simulator', simulatorRoutes);
+app.use('/api/intelligence', intelligenceRoutes);
 
 // Catch 404 & Centralized Error Handler
 app.use(notFoundHandler);
