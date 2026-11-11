@@ -465,18 +465,11 @@ export default function Landing({
               style={{ height: '100%', minHeight: '400px', width: '100%' }}
             >
               {baseMapLayer === 'satellite' ? (
-                <>
-                  <TileLayer
-                    attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                    maxZoom={19}
-                  />
-                  <TileLayer
-                    attribution='&copy; Esri'
-                    url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
-                    maxZoom={19}
-                  />
-                </>
+                <TileLayer
+                  attribution='&copy; Google Maps Satellite'
+                  url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
+                  maxZoom={20}
+                />
               ) : (
                 <TileLayer
                   attribution='&copy; OpenStreetMap contributors'
