@@ -228,6 +228,7 @@ export default function MapPage({
   // Slide-out overlay directory states
   const [isMarksDirectoryOpen, setIsMarksDirectoryOpen] = useState(true);
   const [activeDirectoryTab, setActiveDirectoryTab] = useState('marks');
+  const [isLayersPanelOpen, setIsLayersPanelOpen] = useState(true);
   
   // Load dynamic datasets from local Ingestion Engine
   const [ingestedLayers, setIngestedLayers] = useState({
