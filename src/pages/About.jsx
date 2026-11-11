@@ -77,18 +77,18 @@ export default function About() {
         <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
           <h2 className="text-xl font-bold text-navy-900 font-display flex items-center gap-2">
             <Cpu className="h-5.5 w-5.5 text-brand-orange-600" />
-            Prototype Technology Stack
+            Full-Stack Production Technology Stack
           </h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            This client-side frontend prototype demonstrates full responsiveness and interactive state flows to simulate operational use by central, state, and district disaster management boards:
+            RESILIENCE AI has been engineered with a resilient, modular architecture integrating edge frontend interfaces, an Express REST backend, Supabase PostgreSQL, and Google Gemini AI:
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-600 font-semibold pl-4 list-disc">
-            <li>React JS for component-based logical views</li>
-            <li>Vite for high-speed build compilation</li>
-            <li>Tailwind CSS for professional responsive styling</li>
-            <li>Lucide React for clear vector icons</li>
-            <li>Recharts for historic index telemetry graphs</li>
-            <li>Local browser caching & state propagation</li>
+            <li><strong>Frontend:</strong> React 19, Vite, Tailwind CSS, Leaflet GIS, Recharts, Lucide React</li>
+            <li><strong>Backend:</strong> Node.js, Express.js REST API with Helmet security & Rate Limiting</li>
+            <li><strong>AI Engine:</strong> Google Gen AI SDK (Gemini 1.5 Flash) with structured JSON extraction</li>
+            <li><strong>Document Pipeline:</strong> PDF text extraction, validation, and OCR capability</li>
+            <li><strong>Database:</strong> Supabase PostgreSQL (14 Tables, UUID keys, Foreign Keys, RLS)</li>
+            <li><strong>Action Directives:</strong> Client-side vector jsPDF compiler for official DDMA action plans</li>
           </ul>
         </div>
 
