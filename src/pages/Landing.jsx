@@ -208,13 +208,27 @@ export default function Landing({
   const [mapCenter, setMapCenter] = useState([26.2006, 92.9376]);
   const [mapZoom, setMapZoom] = useState(7);
 
-  // Ingested layer references
-  const [ingestedLayers, setIngestedLayers] = useState({
-    asdma_flood_atlas: null,
-    gsi_bhusanket: null,
-    bmtpc_earthquake: null,
-    imd_warnings: null
+  const [liveStats, setLiveStats] = useState({
+    disastersCataloged: statisticsSummary.disastersCataloged,
+    districtsMonitored: statisticsSummary.districtsMonitored,
+    gapsIdentified: statisticsSummary.gapsIdentified,
+    actionPlansGenerated: statisticsSummary.actionPlansGenerated
   });
+
+  useEffect(() => {
+    api.stats.getDashboardStats()
+      .then(res => {
+        if (res && res.totalDistricts) {
+          setLiveStats({
+            disastersCataloged: res.totalIncidents > 0 ? res.totalIncidents : statisticsSummary.disastersCataloged,
+            districtsMonitored: res.totalDistricts > 0 ? res.totalDistricts : statisticsSummary.districtsMonitored,
+            gapsIdentified: statisticsSummary.gapsIdentified,
+            actionPlansGenerated: statisticsSummary.actionPlansGenerated
+          });
+        }
+      })
+      .catch(() => null);
+  }, []);
 
   // Layer switches states
   const [layers, setLayers] = useState({
