@@ -9,3 +9,4 @@ router.post('/shelters/batch', requireAdminAuth, ResourceController.importShelte
 router.get('/sources', ResourceController.getDataSources);
 
 export default router;
+

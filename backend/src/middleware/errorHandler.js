@@ -18,3 +18,4 @@ export const errorHandler = (err, req, res, next) => {
 export const notFoundHandler = (req, res) => {
   ApiResponse.error(res, `Route ${req.method} ${req.originalUrl} not found on this server.`, 404);
 };
+

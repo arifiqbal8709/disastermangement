@@ -71,3 +71,4 @@ export const DistrictController = {
     return ApiResponse.success(res, result, 'Preparedness score calculated deterministically.');
   }
 };
+

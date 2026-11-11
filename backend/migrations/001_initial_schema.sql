@@ -261,3 +261,4 @@ CREATE POLICY "Public Read Scores" ON preparedness_scores FOR SELECT USING (true
 
 ALTER TABLE action_plans ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public Read Plans" ON action_plans FOR SELECT USING (true);
+

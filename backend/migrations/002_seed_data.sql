@@ -116,3 +116,4 @@ VALUES
   ('chamoli', 'Landslide', 65.0, 50.0, 55.0, 70.0, 60.0, 'High Risk'),
   ('bhuj', 'Earthquake', 60.0, 70.0, 75.0, 80.0, 71.3, 'Very High Risk')
 ON CONFLICT (district_id, hazard_type) DO NOTHING;
+

@@ -8,3 +8,4 @@ router.get('/', IncidentController.getAllIncidents);
 router.post('/', requireAdminAuth, IncidentController.createIncident);
 
 export default router;
+

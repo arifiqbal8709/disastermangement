@@ -6,3 +6,4 @@ const router = Router();
 router.get('/', StatsController.getDashboardStats);
 
 export default router;
+

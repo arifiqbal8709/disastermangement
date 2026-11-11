@@ -24,3 +24,4 @@ export const config = {
     model: process.env.GEMINI_MODEL || 'gemini-1.5-flash'
   }
 };
+

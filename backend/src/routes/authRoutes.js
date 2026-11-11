@@ -11,3 +11,4 @@ router.get('/verify', requireAdminAuth, AuthController.verifySession);
 router.post('/logout', requireAdminAuth, AuthController.logout);
 
 export default router;
+

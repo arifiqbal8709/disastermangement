@@ -88,3 +88,4 @@ export const AuthController = {
     return ApiResponse.error(res, 'Public registration is disabled. Only the designated administrator can access the platform.', 403);
   }
 };
+

@@ -22,3 +22,4 @@ if (config.supabase.url && config.supabase.serviceRoleKey) {
 
 export const supabase = supabaseClient;
 export const isSupabaseConfigured = () => Boolean(supabaseClient);
+

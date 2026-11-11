@@ -7,3 +7,4 @@ router.get('/:districtId', ActionPlanController.getDistrictActionPlan);
 router.get('/:districtId/:hazardType', ActionPlanController.getDistrictActionPlan);
 
 export default router;
+

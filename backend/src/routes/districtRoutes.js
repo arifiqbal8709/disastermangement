@@ -8,3 +8,4 @@ router.get('/:id', DistrictController.getDistrictById);
 router.post('/calculate-score', DistrictController.calculatePreparednessScore);
 
 export default router;
+

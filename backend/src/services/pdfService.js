@@ -61,3 +61,4 @@ export const PDFService = {
     return sanitized.length > maxChars ? sanitized.substring(0, maxChars) + '\n...[Content truncated for analysis token limit]' : sanitized;
   }
 };
+

@@ -25,3 +25,4 @@ export const scoreCalculationSchema = z.object({
   evacuation: z.number().min(0).max(100),
   medical: z.number().min(0).max(100)
 });
+

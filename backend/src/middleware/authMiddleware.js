@@ -24,3 +24,4 @@ export const requireAdminAuth = (req, res, next) => {
     return ApiResponse.error(res, 'Invalid authentication token.', 401);
   }
 };
+

@@ -9,3 +9,4 @@ router.post('/upload', uploadLimiter, uploadSinglePdf, ReportController.uploadAn
 router.get('/', ReportController.getAllReports);
 
 export default router;
+

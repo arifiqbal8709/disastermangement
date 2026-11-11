@@ -49,3 +49,4 @@ export const AuditService = {
     return localAuditLogs.slice(0, limit);
   }
 };
+
