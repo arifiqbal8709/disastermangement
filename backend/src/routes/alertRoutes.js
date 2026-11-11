@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
  * POST /api/alerts
  * Broadcast a verified disaster alert (Admin Protected)
  */
-router.post('/', verifyToken, requireRole(['admin', 'super_admin']), async (req, res, next) => {
+router.post('/', requireAdminAuth, async (req, res, next) => {
   try {
     const {
       headline,
