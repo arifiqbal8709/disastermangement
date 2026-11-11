@@ -900,12 +900,34 @@ export default function MapPage({
         </MapContainer>
 
         {/* Floating Map Layers Control Panel */}
-        <div className="absolute top-16 right-4 bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-xl p-4 z-[990] w-56 text-xs space-y-3 text-left">
-          <div className="flex items-center gap-1.5 font-bold text-navy-900 border-b border-slate-200 pb-2">
-            <Layers className="h-4.5 w-4.5 text-navy-900" />
-            <span>Hazard Map Layers</span>
-          </div>
-          <div className="space-y-3 font-semibold">
+        {!isLayersPanelOpen ? (
+          <button
+            type="button"
+            onClick={() => setIsLayersPanelOpen(true)}
+            className="absolute top-16 right-4 z-[990] bg-[#071B33]/90 hover:bg-[#071B33] text-white backdrop-blur-md border border-slate-700/80 shadow-xl rounded-xl px-3 py-2 flex items-center gap-2 text-xs font-bold transition-all hover:scale-105"
+            title="Open Hazard Map Layers"
+          >
+            <Layers className="h-4 w-4 text-brand-orange-500" />
+            <span>Hazard Layers</span>
+            <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
+          </button>
+        ) : (
+          <div className="absolute top-16 right-4 bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-xl p-4 z-[990] w-56 text-xs space-y-3 text-left page-fade-in">
+            <div className="flex items-center justify-between font-bold text-navy-900 border-b border-slate-200 pb-2">
+              <div className="flex items-center gap-1.5">
+                <Layers className="h-4.5 w-4.5 text-navy-900" />
+                <span>Hazard Map Layers</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsLayersPanelOpen(false)}
+                className="p-1 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors"
+                title="Collapse Panel"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+            <div className="space-y-3 font-semibold">
             {Object.entries(datasetChecks).map(([layerId, config]) => (
               <div key={layerId} className="space-y-0.5">
                 <label className={`flex items-center gap-2 cursor-pointer ${config.loaded ? 'text-slate-700 hover:text-navy-900' : 'text-slate-400 cursor-not-allowed'}`}>
