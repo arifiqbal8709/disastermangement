@@ -1,0 +1,81 @@
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-navy-900 antialiased selection:bg-brand-blue-100;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-navy-900 tracking-tight font-semibold;
+  }
+}
+
+/* Professional Dot Grid Background */
+.tech-grid {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Glassmorphism card highlight */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Custom Scrollbar for dashboard panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400;
+}
+
+/* Pulse animation for active simulation */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+.animate-radar-pulse {
+  animation: radar-pulse 3s ease-in-out infinite;
+}
+
+/* Smooth transition for route switches */
+.page-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Clean utility borders */
+.card-border {
+  @apply border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300;
+}
+
