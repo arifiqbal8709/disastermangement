@@ -437,6 +437,39 @@ export default function Dashboard({ selectedDistrictId, selectedDisasterType = "
                 <p className="text-xs text-slate-400">AI extraction pipeline tracing disaster logs step-by-step to recommendations.</p>
               </div>
 
+              {/* Dynamic Live Gemini Analysis Banner */}
+              {latestAiAnalysis && (
+                <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-5 rounded-xl space-y-3 shadow-md border border-blue-800">
+                  <div className="flex justify-between items-center flex-wrap gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-500/30 border border-blue-400/40 rounded-full text-[10px] font-bold tracking-wider uppercase text-blue-200">
+                      <Cpu className="h-3.5 w-3.5 text-blue-300" />
+                      Live Gemini AI Extraction: {latestAiAnalysis.reportName}
+                    </span>
+                    <span className="text-[10px] text-blue-300 font-mono">
+                      {new Date(latestAiAnalysis.timestamp).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  <h4 className="text-sm font-bold text-white leading-snug">
+                    {latestAiAnalysis.summary}
+                  </h4>
+                  {latestAiAnalysis.risk_factors && latestAiAnalysis.risk_factors.length > 0 && (
+                    <div className="text-xs text-blue-200 space-y-1">
+                      <span className="font-bold text-white block text-[11px] uppercase tracking-wider">Identified Risk Factors:</span>
+                      <ul className="list-disc pl-4 space-y-0.5 text-blue-100">
+                        {latestAiAnalysis.risk_factors.map((rf, rIdx) => (
+                          <li key={rIdx}>{rf}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {latestAiAnalysis.disclaimer && (
+                    <p className="text-[9px] text-blue-300/80 italic border-t border-blue-800/80 pt-2">
+                      {latestAiAnalysis.disclaimer}
+                    </p>
+                  )}
+                </div>
+              )}
+
               {activeDistrict.aiFindings && activeDistrict.aiFindings.length > 0 ? (
                 <div className="space-y-8 pl-4 relative border-l-2 border-slate-100">
                   {activeDistrict.aiFindings.map((finding, idx) => (
