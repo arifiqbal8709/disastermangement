@@ -232,3 +232,4 @@ export default function DisasterMemoryModal({ isOpen, onClose, defaultDistrict =
     </div>
   );
 }
+

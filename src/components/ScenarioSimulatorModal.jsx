@@ -350,3 +350,4 @@ export default function ScenarioSimulatorModal({ isOpen, onClose, districtId, di
     </div>
   );
 }
+

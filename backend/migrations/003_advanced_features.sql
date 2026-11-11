@@ -191,3 +191,4 @@ CREATE INDEX IF NOT EXISTS idx_missing_status ON missing_persons(current_status)
 CREATE INDEX IF NOT EXISTS idx_damage_district ON damage_assessments(district_id);
 CREATE INDEX IF NOT EXISTS idx_relief_shelter ON relief_inventory(shelter_id);
 CREATE INDEX IF NOT EXISTS idx_sos_status ON sos_signals(rescue_status);
+

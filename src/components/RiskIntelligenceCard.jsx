@@ -187,3 +187,4 @@ export default function RiskIntelligenceCard({ districtId, hazardType = 'Flood',
     </div>
   );
 }
+
