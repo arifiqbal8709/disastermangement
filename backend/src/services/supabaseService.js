@@ -36,10 +36,196 @@ const initialIncidents = [
   { id: 'inc_4', name: '2001 Gujarat Earthquake', disaster_type: 'Earthquake', state: 'Gujarat', district: 'Bhuj', incident_year: 2001, impact_summary: 'Magnitude 7.7 earthquake centered 20km from Bhuj. 20,000 casualties.', damage_information: '300,000 masonry homes destroyed.', infrastructure_impact: 'Bhuj Civil Hospital collapsed; municipal water mains broken.', response_actions: 'National and international search & rescue teams deployed.', source_name: 'BMTPC Vulnerability Atlas of India', source_url: 'https://bmtpc.org', verification_status: 'verified' }
 ];
 
+const initialAlerts = [
+  {
+    id: 'alt_1',
+    cap_identifier: 'IN-AS-CWC-2026-0042',
+    headline: '🔴 CWC RED BULLETIN: Brahmaputra River Surging 1.25m Above Danger Level at Dibrugarh & Nimatighat',
+    event: 'Extreme Flash Flood & River Overflow',
+    severity: 'Red',
+    urgency: 'Immediate',
+    certainty: 'Observed',
+    effective: new Date().toISOString(),
+    expires: new Date(Date.now() + 86400000).toISOString(),
+    district_id: 'dibrugarh',
+    district_name: 'Dibrugarh',
+    state: 'Assam',
+    area_description: 'Rohmoria, Bogibeel flood dyke sectors and lower alluvial blocks',
+    instruction: 'Evacuate all households within 500m of unreinforced dykes to designated ASDMA multi-purpose shelters immediately.',
+    source_agency: 'Central Water Commission (CWC)',
+    bulletin_url: 'http://cwc.gov.in/flood-forecast',
+    verified: true
+  },
+  {
+    id: 'alt_2',
+    cap_identifier: 'IN-AS-IMD-2026-0118',
+    headline: '🟧 IMD ORANGE ALERT: Torrential Monsoon Run-off (140–210mm) Forecast Across Northern Catchments',
+    event: 'Heavy Precipitation Run-off',
+    severity: 'Orange',
+    urgency: 'Expected',
+    certainty: 'Likely',
+    effective: new Date().toISOString(),
+    expires: new Date(Date.now() + 172800000).toISOString(),
+    district_id: 'dhemaji',
+    district_name: 'Dhemaji',
+    state: 'Assam',
+    area_description: 'Jiadhal, Gai, and Subansiri river catchments',
+    instruction: 'Pre-position SDRF inflatable boats at Gogamukh and Silapathar staging depots. Farmers avoid river islands (chars).',
+    source_agency: 'India Meteorological Department (IMD)',
+    bulletin_url: 'https://mausam.imd.gov.in',
+    verified: true
+  },
+  {
+    id: 'alt_3',
+    cap_identifier: 'IN-KL-GSI-2026-0089',
+    headline: '🟧 GSI LANDSLIDE WATCH: Moisture Saturation Ratio Exceeds 85% on Chooralmala-Mundakkai Slope',
+    event: 'Debris Flow & Slope Failure Risk',
+    severity: 'Orange',
+    urgency: 'Expected',
+    certainty: 'Likely',
+    effective: new Date().toISOString(),
+    expires: new Date(Date.now() + 86400000).toISOString(),
+    district_id: 'wayanad',
+    district_name: 'Wayanad',
+    state: 'Kerala',
+    area_description: 'Vellarimala, Chooralmala, Meppadi hill terrain',
+    instruction: 'Night travel on Meppadi-Chooralmala highway restricted. Relief camp sirens placed on 15-minute telemetry standby.',
+    source_agency: 'Geological Survey of India (GSI)',
+    bulletin_url: 'https://gsi.gov.in/bhusanket',
+    verified: true
+  },
+  {
+    id: 'alt_4',
+    cap_identifier: 'IN-AS-ASDMA-2026-0005',
+    headline: '🟡 ASDMA ADVISORY: Bethukandi Embankment Sluice Gate Inspections Underway in Cachar',
+    event: 'Embankment Seepage Watch',
+    severity: 'Yellow',
+    urgency: 'Future',
+    certainty: 'Possible',
+    effective: new Date().toISOString(),
+    expires: new Date(Date.now() + 259200000).toISOString(),
+    district_id: 'cachar',
+    district_name: 'Cachar',
+    state: 'Assam',
+    area_description: 'Silchar Municipal Area, Sonai and Katigorah blocks',
+    instruction: 'Water resource department patrol squads deployed for 24x7 dyke piping surveillance. Report sand boiling to 1077.',
+    source_agency: 'Assam State Disaster Management Authority (ASDMA)',
+    bulletin_url: 'https://asdma.assam.gov.in',
+    verified: true
+  }
+];
+
+const initialDisasterMemory = [
+  {
+    id: 'mem_1',
+    incident_id: 'inc_2',
+    event_name: '2022 Historic Silchar Flood Catastrophe',
+    disaster_type: 'Flood',
+    incident_year: 2022,
+    state: 'Assam',
+    district: 'Cachar',
+    failure_modes: [
+      'Unrepaired breach in Bethukandi dyke allowed Barak floodwaters to inundate town from rear',
+      'Civil Hospital and emergency sub-stations built at zero elevation without raised plinths',
+      'VHF wireless towers flooded at ground level cutting district telemetry communication'
+    ],
+    lessons_learned: [
+      'Permanent ring-bunds required around district headquarters instead of temporary earthen plugs',
+      'Hospital generators and medical store facilities must be elevated minimum 2.5m above HFL',
+      'Auxiliary satellite phones must be pre-positioned at block development offices'
+    ],
+    actionable_protocols: [
+      'Pre-monsoon geo-synthetic grouting of all Barak river sluice gates by April 30',
+      'Pre-position 12 High-Capacity Dewatering Pumps (150 HP) at Rangirkhari junction',
+      'Establish 3 forward airdrop drop-zones in higher elevation tea garden plateaus'
+    ],
+    source_report: 'ASDMA Comprehensive Post-Disaster Needs Assessment (PDNA) 2022',
+    source_url: 'https://asdma.assam.gov.in/portals/pdna-2022'
+  },
+  {
+    id: 'mem_2',
+    incident_id: 'inc_1',
+    event_name: '2024 Chooralmala-Mundakkai Landslide Debris Avalanche',
+    disaster_type: 'Landslide',
+    incident_year: 2024,
+    state: 'Kerala',
+    district: 'Wayanad',
+    failure_modes: [
+      'Rapid pore-water pressure accumulation in saturated tea estate slopes without real-time tiltmeters',
+      'Single access Bailey bridge washed away isolating entire Mundakkai community',
+      'Evacuation shelters were located inside the run-out debris fan zone'
+    ],
+    lessons_learned: [
+      'Shelters must never be established inside narrow V-shaped valley floors',
+      'Dual redundant aerial ropeways and modular Bailey bridge components must be cached on high ground',
+      'Threshold of 200mm rainfall in 24 hours must trigger mandatory daylight evacuation'
+    ],
+    actionable_protocols: [
+      'Install IoT slope-stability piezometers linked to solar sirens',
+      'Relocate community shelters to bedrock ridge top locations above 1100m elevation',
+      'Conduct bi-monthly community mock drills across high slope habitations'
+    ],
+    source_report: 'GSI Landslide Debris Flow Forensic Assessment 2024',
+    source_url: 'https://gsi.gov.in/reports/wayanad-2024'
+  },
+  {
+    id: 'mem_3',
+    incident_id: 'inc_3',
+    event_name: '2021 Rishi Ganga Glacial Outburst Flood (GLOF)',
+    disaster_type: 'Landslide / Flash Flood',
+    incident_year: 2021,
+    state: 'Uttarakhand',
+    district: 'Chamoli',
+    failure_modes: [
+      'Hanging glacier rock-mass detached at 5600m with zero upstream sensor telemetry',
+      'Hydroelectric barrage lacked automated emergency sluice release protocols',
+      'Workers in lower tunnels had no sirens or audible alarm systems'
+    ],
+    lessons_learned: [
+      'High-altitude GLOF early warning sirens with satellite uplink are non-negotiable',
+      'Hydel projects must have dedicated escape galleries and thermal drone rescue kits'
+    ],
+    actionable_protocols: [
+      'Deploy automatic water level gauges at Raunthi and Rishi Ganga confluence',
+      'Enforce mandatory wireless beacon bands for all subterranean infrastructure personnel'
+    ],
+    source_report: 'NDMA High-Altitude GLOF Study 2021',
+    source_url: 'https://ndma.gov.in/publications/glof-2021'
+  },
+  {
+    id: 'mem_4',
+    incident_id: 'inc_4',
+    event_name: '2001 Bhuj Earthquake Disaster',
+    disaster_type: 'Earthquake',
+    incident_year: 2001,
+    state: 'Gujarat',
+    district: 'Bhuj',
+    failure_modes: [
+      'Unreinforced random rubble masonry collapsed instantly under seismic horizontal shear',
+      'District hospital collapsed killing medical staff during peak emergency response',
+      'Single road corridor to Kutch cut off due to bridge abutment cracks'
+    ],
+    lessons_learned: [
+      'Base-isolation engineering required for all critical emergency facilities in Zone V',
+      'Containerized field surgical units must be pre-positioned outside urban collapse cones'
+    ],
+    actionable_protocols: [
+      'Audit seismic retrofitting of all district disaster management offices',
+      'Maintain strategic reserve of heavy hydraulic cutters and pneumatic air lifting bags'
+    ],
+    source_report: 'BMTPC Gujarat Earthquake Vulnerability Report 2001',
+    source_url: 'https://bmtpc.org/bhuj-2001'
+  }
+];
+
 const memoryDb = {
   districts: [...initialDistricts],
   shelters: [...initialShelters],
   historical_incidents: [...initialIncidents],
+  alerts: [...initialAlerts],
+  disaster_memory: [...initialDisasterMemory],
+  scenarios: [],
+  risk_assessments: [],
   disaster_reports: [],
   report_analyses: [],
   action_plans: [],
