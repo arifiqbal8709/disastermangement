@@ -38,3 +38,4 @@ checkAndPush();
 
 // Polling interval
 setInterval(checkAndPush, INTERVAL_MS);
+
