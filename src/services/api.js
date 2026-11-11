@@ -161,6 +161,90 @@ export const api = {
       const data = await res.json();
       return data.data || {};
     }
+  },
+
+  // Live CAP Disaster Alerts (Feature 7)
+  alerts: {
+    getActive: async (districtId = '') => {
+      const query = districtId ? `?districtId=${encodeURIComponent(districtId)}` : '';
+      const res = await fetch(`${API_BASE}/alerts${query}`);
+      const data = await res.json();
+      return data.data || [];
+    },
+
+    broadcast: async (alertData) => {
+      const res = await fetch(`${API_BASE}/alerts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeaders()
+        },
+        body: JSON.stringify(alertData)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to broadcast alert');
+      return data.data;
+    }
+  },
+
+  // Historical Disaster Memory Engine (Feature 2)
+  memory: {
+    search: async (q = '', hazard = '') => {
+      const params = new URLSearchParams();
+      if (q) params.set('q', q);
+      if (hazard) params.set('hazard', hazard);
+      const res = await fetch(`${API_BASE}/memory?${params.toString()}`);
+      const data = await res.json();
+      return data.data || [];
+    },
+
+    getDistrict: async (district) => {
+      const res = await fetch(`${API_BASE}/memory/${encodeURIComponent(district)}`);
+      const data = await res.json();
+      return data.data || [];
+    }
+  },
+
+  // What-If Disaster Scenario Simulator (Feature 4)
+  simulator: {
+    run: async (params) => {
+      const res = await fetch(`${API_BASE}/simulator/run`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(params)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Simulation execution failed');
+      return data.data;
+    },
+
+    getHistory: async (districtId = '') => {
+      const query = districtId ? `?districtId=${encodeURIComponent(districtId)}` : '';
+      const res = await fetch(`${API_BASE}/simulator/history${query}`);
+      const data = await res.json();
+      return data.data || [];
+    }
+  },
+
+  // AI Disaster Risk Intelligence (Feature 1)
+  intelligence: {
+    assessRisk: async (districtId, hazardType = 'Flood') => {
+      const res = await fetch(`${API_BASE}/intelligence/risk-assessment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ districtId, hazardType })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Risk assessment failed');
+      return data.data;
+    },
+
+    getHistory: async (districtId = '') => {
+      const query = districtId ? `?districtId=${encodeURIComponent(districtId)}` : '';
+      const res = await fetch(`${API_BASE}/intelligence/history${query}`);
+      const data = await res.json();
+      return data.data || [];
+    }
   }
 };
 
