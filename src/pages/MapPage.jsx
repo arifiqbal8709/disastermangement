@@ -214,6 +214,7 @@ export default function MapPage({
   const [simDisaster, setSimDisaster] = useState("Flood");
   const [mapCenter, setMapCenter] = useState(null);
   const [mapZoom, setMapZoom] = useState(null);
+  const [baseMapLayer, setBaseMapLayer] = useState('satellite'); // 'satellite' | 'streets'
 
   // Ingested shelter database values
   const [shelterDataset, setShelterDataset] = useState([]);
