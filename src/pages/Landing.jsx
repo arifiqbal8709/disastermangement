@@ -466,12 +466,14 @@ export default function Landing({
             >
               {baseMapLayer === 'satellite' ? (
                 <TileLayer
+                  key="landing-google-hybrid-satellite"
                   attribution='&copy; Google Maps Satellite'
                   url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
                   maxZoom={20}
                 />
               ) : (
                 <TileLayer
+                  key="landing-osm-streets-layer"
                   attribution='&copy; OpenStreetMap contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
