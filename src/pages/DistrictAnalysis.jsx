@@ -279,7 +279,7 @@ export default function DistrictAnalysis({
             </div>
 
             {/* Submit Button */}
-            <div className="pt-2">
+            <div className="pt-2 space-y-2">
               <button
                 type="submit"
                 className="w-full py-4 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 text-base tracking-wider uppercase"
@@ -287,6 +287,17 @@ export default function DistrictAnalysis({
                 <Brain className="h-5 w-5 text-brand-orange-500 fill-brand-orange-500/20" />
                 RUN AI ANALYSIS
               </button>
+
+              <div className="pt-2 text-center">
+                <button
+                  type="button"
+                  onClick={() => setIsMemoryOpen(true)}
+                  className="w-full inline-flex items-center justify-center gap-2 text-xs font-extrabold text-purple-700 hover:text-purple-900 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-4 py-2.5 rounded-xl transition-all shadow-sm"
+                >
+                  <BookOpen className="h-4 w-4 text-purple-600" />
+                  <span>Explore Historical Disaster Memory & Forensic Lessons</span>
+                </button>
+              </div>
             </div>
 
           </form>
@@ -340,6 +351,13 @@ export default function DistrictAnalysis({
         )}
 
       </div>
+
+      {/* 🏛️ FEATURE 2: HISTORICAL DISASTER MEMORY MODAL */}
+      <DisasterMemoryModal
+        isOpen={isMemoryOpen}
+        onClose={() => setIsMemoryOpen(false)}
+        defaultDistrict={selectedDistrictName}
+      />
     </div>
   );
 }
