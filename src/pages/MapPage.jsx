@@ -1021,6 +1021,7 @@ export default function MapPage({
             </div>
           </div>
         </div>
+        )}
 
         {/* 🛡️ FRONTMOST LEFT OVERLAY CONTROL PANEL (Z-1000, TOP-4 LEFT-14) */}
         <div className="absolute top-4 left-14 z-[1000] text-left font-sans transition-all duration-300">
