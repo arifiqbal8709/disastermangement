@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Database, Upload, FileText, CheckCircle2, AlertTriangle, AlertCircle, RefreshCw, Layers, Landmark, Trash2, Calendar, FileJson, Info, Edit, Plus, X, Phone, Mail, Link2, Eye, EyeOff } from 'lucide-react';
+import { Database, Upload, FileText, CheckCircle2, AlertTriangle, AlertCircle, RefreshCw, Layers, Landmark, Trash2, Calendar, FileJson, Info, Edit, Plus, X, Phone, Mail, Link2, Eye, EyeOff, LogOut, ShieldCheck } from 'lucide-react';
 import { officialDatasetRegistry, saveIngestedDataset, getIngestedDataset, deleteIngestedDataset, parseCSV, parseGeoJSON, parsePDFMetadata, parseSheltersDataset } from '../dataSources/dataIngestion';
+import { api } from '../services/api';
 
-export default function AdminSources() {
+export default function AdminSources({ onLogout }) {
   const [datasets, setDatasets] = useState([]);
   const [selectedKey, setSelectedKey] = useState("");
   const [uploadFile, setUploadFile] = useState(null);
@@ -287,17 +288,33 @@ export default function AdminSources() {
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Header Block */}
-        <div className="border-b border-slate-200 pb-5 space-y-1">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <Database className="h-4.5 w-4.5 text-navy-800" />
-            <span>Database Ingest Panel</span>
+        <div className="border-b border-slate-200 pb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="space-y-1">
+            <div className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+              <Database className="h-4.5 w-4.5 text-navy-800" />
+              <span>Database Ingest Panel</span>
+              <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-green-100 text-green-800 border border-green-200">
+                <ShieldCheck className="h-3 w-3 text-green-600" />
+                Verified Admin Session
+              </span>
+            </div>
+            <h1 className="text-3xl font-extrabold text-navy-900 font-display">
+              Admin Data Sources & Intelligence Hub
+            </h1>
+            <p className="text-slate-500 text-sm font-semibold">
+              Connect and upload verified GeoJSON, CSV, or PDF datasets directly into Supabase PostgreSQL & Storage.
+            </p>
           </div>
-          <h1 className="text-3xl font-extrabold text-navy-900 font-display">
-            Admin Data Sources
-          </h1>
-          <p className="text-slate-500 text-sm font-semibold">
-            Connect and upload verified GeoJSON, CSV, or PDF datasets downloaded from government operations platforms.
-          </p>
+
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              className="px-4 py-2 bg-red-600/90 hover:bg-red-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider shadow flex items-center gap-2 transition"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign Out Admin
+            </button>
+          )}
         </div>
 
         {/* Global Alert Notification */}
