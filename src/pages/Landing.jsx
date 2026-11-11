@@ -625,7 +625,7 @@ export default function Landing({
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center font-mono">
           <div className="space-y-1">
             <div className="text-3xl font-extrabold text-navy-900 font-display">
-              {statisticsSummary.disastersCataloged}
+              {liveStats.disastersCataloged}
             </div>
             <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
               Disasters Cataloged
@@ -633,7 +633,7 @@ export default function Landing({
           </div>
           <div className="space-y-1 border-l border-slate-200">
             <div className="text-3xl font-extrabold text-[#061A2F] font-display">
-              {statisticsSummary.districtsMonitored}
+              {liveStats.districtsMonitored}
             </div>
             <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
               Districts Monitored
@@ -641,7 +641,7 @@ export default function Landing({
           </div>
           <div className="space-y-1 border-l border-slate-200">
             <div className="text-3xl font-extrabold text-[#061A2F] font-display">
-              {statisticsSummary.gapsIdentified}
+              {liveStats.gapsIdentified}
             </div>
             <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
               Mitigation Gaps Found
@@ -649,7 +649,7 @@ export default function Landing({
           </div>
           <div className="space-y-1 border-l border-slate-200">
             <div className="text-3xl font-extrabold text-[#061A2F] font-display">
-              {statisticsSummary.actionPlansGenerated}
+              {liveStats.actionPlansGenerated}
             </div>
             <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
               Action Policies Formatted
