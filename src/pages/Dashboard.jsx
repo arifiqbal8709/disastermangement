@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { ShieldAlert, AlertTriangle, AlertCircle, Map, Home, Anchor, Siren, ArrowRight, ShieldCheck, HeartPulse, Clock, Landmark, Info, FileText, Compass, Activity, CheckCircle2, ChevronRight, X } from 'lucide-react';
+import { ShieldAlert, AlertTriangle, AlertCircle, Map, Home, Anchor, Siren, ArrowRight, ShieldCheck, HeartPulse, Clock, Landmark, Info, FileText, Compass, Activity, CheckCircle2, ChevronRight, X, Cpu } from 'lucide-react';
 import { getDistrictData } from '../data/mockData';
 import SourceBadge from '../components/SourceBadge';
 import { getIngestedDataset } from '../dataSources/dataIngestion';
+import { api } from '../services/api';
 
 const getMetricIcon = (name) => {
   switch (name) {
@@ -44,22 +45,55 @@ export default function Dashboard({ selectedDistrictId, selectedDisasterType = "
   const [dynamicShelterCount, setDynamicShelterCount] = useState(null);
   const [dynamicShelterCapacity, setDynamicShelterCapacity] = useState(null);
 
+  const [latestAiAnalysis, setLatestAiAnalysis] = useState(null);
+
   useEffect(() => {
     setDynamicShelterCount(null);
     setDynamicShelterCapacity(null);
-    const record = getIngestedDataset('official_shelters');
-    if (record && record.data && record.data.length > 0) {
-      const districtShelters = record.data.filter(s => 
-        s.district && activeDistrict.name && s.district.toLowerCase() === activeDistrict.name.toLowerCase()
-      );
-      if (districtShelters.length > 0) {
-        setDynamicShelterCount(districtShelters.length);
-        const totalCap = districtShelters.reduce((acc, curr) => {
-          const cap = parseInt(curr.capacity);
-          return acc + (isNaN(cap) ? 0 : cap);
-        }, 0);
-        setDynamicShelterCapacity(totalCap);
+
+    // 1. Fetch live shelters from backend REST API
+    api.resources.getShelters(activeDistrict.name)
+      .then(shelters => {
+        if (shelters && shelters.length > 0) {
+          setDynamicShelterCount(shelters.length);
+          const totalCap = shelters.reduce((acc, curr) => {
+            const cap = parseInt(curr.capacity);
+            return acc + (isNaN(cap) ? 0 : cap);
+          }, 0);
+          setDynamicShelterCapacity(totalCap);
+        }
+      })
+      .catch(() => {
+        // Fallback to local storage
+        const record = getIngestedDataset('official_shelters');
+        if (record && record.data && record.data.length > 0) {
+          const districtShelters = record.data.filter(s => 
+            s.district && activeDistrict.name && s.district.toLowerCase() === activeDistrict.name.toLowerCase()
+          );
+          if (districtShelters.length > 0) {
+            setDynamicShelterCount(districtShelters.length);
+            const totalCap = districtShelters.reduce((acc, curr) => {
+              const cap = parseInt(curr.capacity);
+              return acc + (isNaN(cap) ? 0 : cap);
+            }, 0);
+            setDynamicShelterCapacity(totalCap);
+          }
+        }
+      });
+
+    // 2. Load latest real Gemini AI analysis if generated for this district
+    try {
+      const rawAi = localStorage.getItem('resilience_latest_ai_analysis');
+      if (rawAi) {
+        const parsed = JSON.parse(rawAi);
+        if (parsed.districtName && activeDistrict.name && parsed.districtName.toLowerCase() === activeDistrict.name.toLowerCase()) {
+          setLatestAiAnalysis(parsed);
+        } else {
+          setLatestAiAnalysis(null);
+        }
       }
+    } catch (e) {
+      setLatestAiAnalysis(null);
     }
   }, [activeDistrict.name]);
 
