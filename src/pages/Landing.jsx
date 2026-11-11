@@ -430,16 +430,59 @@ export default function Landing({
           {/* Right Column: Actual Assam Leaflet Map (60%) */}
           <div className="lg:col-span-7 h-[400px] min-h-[400px] w-full border border-slate-200 shadow-sm rounded-[14px] overflow-hidden relative z-10 bg-slate-50">
             
+            {/* Floating Satellite / Street View Mode Switcher */}
+            <div className="absolute top-3 left-3 z-[999] bg-[#071B33]/90 backdrop-blur-md p-1 rounded-xl shadow-xl border border-slate-700/80 flex items-center gap-1 text-[10px] font-bold">
+              <button
+                type="button"
+                onClick={() => setBaseMapLayer('satellite')}
+                className={`px-2.5 py-1 rounded-lg flex items-center gap-1 transition-all ${
+                  baseMapLayer === 'satellite'
+                    ? 'bg-blue-600 text-white shadow-md font-extrabold'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <Globe className="h-3 w-3 text-blue-300" />
+                <span>🛰️ Satellite</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setBaseMapLayer('streets')}
+                className={`px-2.5 py-1 rounded-lg flex items-center gap-1 transition-all ${
+                  baseMapLayer === 'streets'
+                    ? 'bg-blue-600 text-white shadow-md font-extrabold'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <MapPin className="h-3 w-3 text-blue-300" />
+                <span>🗺️ Streets</span>
+              </button>
+            </div>
+
             <MapContainer 
               center={[26.2006, 92.9376]} 
               zoom={7} 
               scrollWheelZoom={true}
               style={{ height: '100%', minHeight: '400px', width: '100%' }}
             >
-              <TileLayer
-                attribution='&copy; OpenStreetMap contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+              {baseMapLayer === 'satellite' ? (
+                <>
+                  <TileLayer
+                    attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                    maxZoom={19}
+                  />
+                  <TileLayer
+                    attribution='&copy; Esri'
+                    url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
+                    maxZoom={19}
+                  />
+                </>
+              ) : (
+                <TileLayer
+                  attribution='&copy; OpenStreetMap contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+              )}
 
               <MapRefresher mapCenter={mapCenter} mapZoom={mapZoom} activeDistrict={selectedDistrict} />
 
