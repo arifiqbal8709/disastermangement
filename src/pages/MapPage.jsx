@@ -897,7 +897,7 @@ export default function MapPage({
         </MapContainer>
 
         {/* Floating Map Layers Control Panel */}
-        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg rounded-xl p-4 z-40 w-56 text-xs space-y-3 text-left">
+        <div className="absolute top-16 right-4 bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-xl p-4 z-[990] w-56 text-xs space-y-3 text-left">
           <div className="flex items-center gap-1.5 font-bold text-navy-900 border-b border-slate-200 pb-2">
             <Layers className="h-4.5 w-4.5 text-navy-900" />
             <span>Hazard Map Layers</span>
