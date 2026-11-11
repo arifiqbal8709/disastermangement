@@ -417,6 +417,157 @@ export const SupabaseService = {
     return memoryDb.report_analyses;
   },
 
+  // ALERTS (Live CAP-Compliant Alert Center)
+  getAlerts: async (districtId = null) => {
+    if (isSupabaseConfigured()) {
+      try {
+        let query = supabase.from('alerts').select('*').order('created_at', { ascending: false });
+        if (districtId) {
+          query = query.or(`district_id.eq.${districtId},district_id.is.null`);
+        }
+        const { data, error } = await query;
+        if (!error && data) return data;
+      } catch (e) {
+        logger.error('Supabase getAlerts error:', { error: e.message });
+      }
+    }
+
+    if (districtId) {
+      return memoryDb.alerts.filter(a => !a.district_id || a.district_id.toLowerCase() === districtId.toLowerCase());
+    }
+    return memoryDb.alerts;
+  },
+
+  broadcastAlert: async (alertData) => {
+    const record = {
+      id: uuidv4(),
+      cap_identifier: `IN-ALERT-${Date.now()}`,
+      created_at: new Date().toISOString(),
+      verified: true,
+      ...alertData
+    };
+
+    if (isSupabaseConfigured()) {
+      try {
+        const { data, error } = await supabase.from('alerts').insert([record]).select().single();
+        if (!error && data) return data;
+      } catch (e) {
+        logger.error('Supabase broadcastAlert error:', { error: e.message });
+      }
+    }
+
+    memoryDb.alerts.unshift(record);
+    return record;
+  },
+
+  // DISASTER MEMORY ENGINE
+  getDisasterMemory: async (districtOrKeyword = null) => {
+    if (isSupabaseConfigured()) {
+      try {
+        let query = supabase.from('disaster_memory').select('*');
+        if (districtOrKeyword) {
+          query = query.or(`district.ilike.%${districtOrKeyword}%,event_name.ilike.%${districtOrKeyword}%`);
+        }
+        const { data, error } = await query;
+        if (!error && data) return data;
+      } catch (e) {
+        logger.error('Supabase getDisasterMemory error:', { error: e.message });
+      }
+    }
+
+    if (districtOrKeyword) {
+      const q = districtOrKeyword.toLowerCase();
+      return memoryDb.disaster_memory.filter(m => 
+        m.district.toLowerCase().includes(q) || 
+        m.event_name.toLowerCase().includes(q) ||
+        m.disaster_type.toLowerCase().includes(q)
+      );
+    }
+    return memoryDb.disaster_memory;
+  },
+
+  // SCENARIOS (What-If Simulator)
+  saveScenario: async (scenarioData) => {
+    const record = {
+      id: uuidv4(),
+      created_at: new Date().toISOString(),
+      ...scenarioData
+    };
+
+    if (isSupabaseConfigured()) {
+      try {
+        const { data, error } = await supabase.from('scenarios').insert([record]).select().single();
+        if (!error && data) return data;
+      } catch (e) {
+        logger.error('Supabase saveScenario error:', { error: e.message });
+      }
+    }
+
+    memoryDb.scenarios.unshift(record);
+    return record;
+  },
+
+  getScenarios: async (districtId = null) => {
+    if (isSupabaseConfigured()) {
+      try {
+        let query = supabase.from('scenarios').select('*').order('created_at', { ascending: false });
+        if (districtId) {
+          query = query.eq('district_id', districtId);
+        }
+        const { data, error } = await query;
+        if (!error && data) return data;
+      } catch (e) {
+        logger.error('Supabase getScenarios error:', { error: e.message });
+      }
+    }
+
+    if (districtId) {
+      return memoryDb.scenarios.filter(s => s.districtId === districtId || s.district_id === districtId);
+    }
+    return memoryDb.scenarios;
+  },
+
+  // RISK ASSESSMENTS (AI Disaster Risk Intelligence)
+  saveRiskAssessment: async (assessmentData) => {
+    const record = {
+      id: uuidv4(),
+      created_at: new Date().toISOString(),
+      ...assessmentData
+    };
+
+    if (isSupabaseConfigured()) {
+      try {
+        const { data, error } = await supabase.from('risk_assessments').insert([record]).select().single();
+        if (!error && data) return data;
+      } catch (e) {
+        logger.error('Supabase saveRiskAssessment error:', { error: e.message });
+      }
+    }
+
+    memoryDb.risk_assessments.unshift(record);
+    return record;
+  },
+
+  getRiskAssessments: async (districtId = null) => {
+    if (isSupabaseConfigured()) {
+      try {
+        let query = supabase.from('risk_assessments').select('*').order('created_at', { ascending: false });
+        if (districtId) {
+          query = query.eq('district_id', districtId);
+        }
+        const { data, error } = await query;
+        if (!error && data) return data;
+      } catch (e) {
+        logger.error('Supabase getRiskAssessments error:', { error: e.message });
+      }
+    }
+
+    if (districtId) {
+      return memoryDb.risk_assessments.filter(r => r.districtId === districtId || r.district_id === districtId);
+    }
+    return memoryDb.risk_assessments;
+  },
+
   // DATA SOURCES
   getDataSources: async () => {
     if (isSupabaseConfigured()) {
