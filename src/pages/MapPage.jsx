@@ -588,12 +588,14 @@ export default function MapPage({
         >
           {baseMapLayer === 'satellite' ? (
             <TileLayer
+              key="google-hybrid-satellite"
               attribution='&copy; Google Maps Satellite'
               url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
               maxZoom={20}
             />
           ) : (
             <TileLayer
+              key="osm-streets-layer"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               maxZoom={19}
